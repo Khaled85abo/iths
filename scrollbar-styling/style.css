@@ -7,9 +7,12 @@
   --scrollbar-track-color-hover: rgba(189, 110, 110, 0.541);
   --scrollbar-thumb-color: #7775;
   --scrollbar-thumb-color-bover: #777;
+
   --white: white;
   --header-color: #777;
+
   --header-height: 50px;
+
   /* to fix the sticky header problem of hidding the top of the section  */
   scroll-padding-top: var(--header-height);
   scroll-behavior: smooth;
