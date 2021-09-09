@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input:focus {
+  outline: 2px solid blueviolet;
+}
+
+label {
+  display: inline-block;
+  transform: translateX(-170px);
+  transition: transform ease 0.5s;
+}
+
+input:focus + label {
+  transform: translate(-180px, -20px);
+  color: blue;
+}
+
+.kort {
+  position: relative;
+  margin-top: 70px;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+article {
+  display: inline-block;
+  width: 100px;
+  height: 150px;
+  background-color: aquamarine;
+  position: absolute;
+}
+article:nth-of-type(9) {
+  background: pink;
+  transform: rotate(var(--rotate, -40deg)) translateX(var(--card, -20%));
+}
+article:nth-of-type(8) {
+  background: purple;
+  transform: rotate(var(--rotate, -30deg)) translateX(var(--card, -15%));
+}
+article:nth-of-type(7) {
+  background: blue;
+  transform: rotate(var(--rotate, -20deg)) translateX(var(--card, -10%));
+}
+article:nth-of-type(6) {
+  background: cyan;
+  transform: rotate(var(--rotate, -10deg)) translateX(var(--card, -5%));
+}
+article:nth-of-type(5) {
+  background: green;
+  transform: rotate(var(--rotate, 0deg)) translateX(var(--card, 0%));
+}
+article:nth-of-type(4) {
+  background: lime;
+  transform: rotate(var(--rotate, 10deg)) translateX(var(--card, 5%));
+}
+article:nth-of-type(3) {
+  background: yellow;
+  transform: rotate(var(--rotate, 20deg)) translateX(var(--card, 10%));
+}
+article:nth-of-type(2) {
+  background: orange;
+  transform: rotate(var(--rotate, 30deg)) translateX(var(--card, 15%));
+}
+article:nth-of-type(1) {
+  background: red;
+  transform: rotate(var(--rotate, 40deg)) translateX(var(--card, 20%));
+}
+.kort:hover article {
+  --card: 140%;
+}
+.kort:hover {
+  transform: rotate(-90deg);
+}
