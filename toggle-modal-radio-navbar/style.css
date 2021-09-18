@@ -1,0 +1,103 @@
+nav {
+  margin: 1rem;
+}
+nav > input {
+  display: none;
+}
+nav > label {
+  padding: 1rem 3rem;
+  cursor: pointer;
+  transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+input[type="radio"]:checked + label {
+  color: white;
+  background-color: aquamarine;
+}
+
+.modal-div > input {
+  display: none;
+}
+
+.modal {
+  height: 14rem;
+  width: 22rem;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: none;
+}
+
+.modal-background {
+  background-color: black;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  display: none;
+}
+.menu {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  height: 25px;
+  width: 25px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url(./menu.png);
+  cursor: pointer;
+  z-index: 4;
+}
+
+input[type="checkbox"]:checked + label > div {
+  background-image: url(./exit.png);
+}
+input[type="checkbox"]:checked ~ .modal-background {
+  pointer-events: none;
+  display: initial;
+}
+input[type="checkbox"]:checked ~ .modal {
+  pointer-events: none;
+  display: initial;
+}
+#dis {
+  width: 300px;
+  height: 120px;
+  background-color: lightgrey;
+  border-radius: 60px;
+  margin: auto;
+  cursor: pointer;
+  margin-top: 250px;
+  border: 2px solid #945fde;
+  position: relative;
+  display: block;
+}
+.daire {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-image: url("https://i.pinimg.com/236x/ff/af/4f/ffaf4feed84a3300ae2cdcf15ee0dccf.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  float: left;
+  margin-top: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+  border: none;
+  transition-property: margin-left, background-image;
+  transition-duration: 0.5s;
+}
+#input:checked + .daire {
+  margin-left: 185px;
+  background-image: url("https://i.pinimg.com/236x/71/73/69/717369dcf99ea09d2a5ca291ce8ffe06.jpg");
+}
+#input {
+  display: none;
+}
