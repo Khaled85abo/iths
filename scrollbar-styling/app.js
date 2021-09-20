@@ -39,3 +39,29 @@ function setThemeColor(backgroundColor, textColor) {
   );
   document.documentElement.style.setProperty(bodyTextColor, textColor);
 }
+
+// fixing a nice navbar
+
+const sections = document.querySelectorAll("section");
+const bubble = document.querySelector(".bubble");
+const gardients = [
+  "linear-gardient(to right top, #f46b45, #eea849)",
+  "linear-gardient(to right top, #005c97, #363795)",
+  "linear-gardient(to right top, #e539335, #e35d5b)",
+];
+
+const options = {
+  threshold: 0.7,
+};
+
+let observer = new IntersectionObserver(navCheck, options);
+
+function navCheck(entries) {
+  entries.forEach((entry) => {
+    console.log(entry);
+  });
+}
+
+sections.forEach((section) => {
+  observer.observe(section);
+});
