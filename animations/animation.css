@@ -16,6 +16,7 @@ label {
   display: inline-block;
   transform: translateX(-170px);
   transition: transform ease 0.5s;
+  pointer-events: none;
 }
 
 input:focus + label {
