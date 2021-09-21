@@ -10,14 +10,17 @@
   </head>
   <body>
     <header>
-      <a href="#section1">section 1</a> <a href="#section2"> section 2</a>
+      <a data-page="section1" href="#section1">section 1</a>
+      <a data-page="section2" href="#section2"> section 2</a>
+      <a data-page="section3" href="#section3"> section 3</a>
+      <div class="bubble"></div>
       <button id="btn">Toggle Theme</button>
     </header>
 
     <input type="color" />
     <button class="input-btn">Change Header Color</button>
 
-    <section id="section1">
+    <section id="section1" class="section1" data-index="0">
       <h2>Section 1</h2>
       <div class="avatar" data-tooltip="Adorable Kitty"></div>
       <h4>
@@ -68,7 +71,7 @@
         veritatis, officia quia.
       </h4>
     </section>
-    <section id="section2">
+    <section id="section2" class="section2" data-index="1">
       <h2>Section 2</h2>
 
       <h4>
@@ -119,13 +122,32 @@
         veritatis, officia quia.
       </h4>
     </section>
-    <section>
+    <!-- <section>
       <div class="aspect-ratio"></div>
-    </section>
-    <section>
+    </section> -->
+    <section id="section3" class="section3" data-index="2">
       <button class="btn"></button><button class="btn big"></button
       ><button class="btn tilted"></button
       ><button class="btn big tilted"></button>
     </section>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/debug.addIndicators.js"
+      integrity="sha512-mq6TSOBEH8eoYFBvyDQOQf63xgTeAk7ps+MHGLWZ6Byz0BqQzrP+3GIgYL+KvLaWgpL8XgDVbIRYQeLa3Vqu6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"
+      integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.js"
+      integrity="sha512-judXDFLnOTJsUwd55lhbrX3uSoSQSOZR6vNrsll+4ViUFv+XOIr/xaIK96soMj6s5jVszd7I97a0H+WhgFwTEg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </body>
 </html>
