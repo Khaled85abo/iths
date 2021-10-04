@@ -83,9 +83,9 @@ section {
   aspect-ratio: 16 / 9;
   background-color: antiquewhite;
 }
-section:last-of-type {
+section:nth-of-type(3) {
   background-color: #ccc;
-  height: 400px;
+  height: 80vh;
   display: flex;
   flex-direction: column;
 }
@@ -157,4 +157,53 @@ section:last-of-type {
 
   border: var(--arrow-size) solid transparent;
   border-top-color: var(--tooltip-color);
+}
+
+section:last-of-type {
+  min-height: 70vh;
+  background: #0e1538;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+.section4 > article {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border-radius: 20px;
+}
+.section4 > article::before {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 140%;
+  background: linear-gradient(#00ccff, #d400d4);
+  animation: animate 4s linear infinite;
+}
+.section4 > article::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 16px;
+  background-color: #0e1538;
+}
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.section4 > article > h2 {
+  position: relative;
+  color: #fff;
+  font-size: 10rem;
+  z-index: 10;
 }
