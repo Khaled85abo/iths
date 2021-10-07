@@ -35,7 +35,7 @@ const booksArray = [
   },
 ];
 
-console.log(booksArray[0].numPages);
+// console.log(booksArray[0].numPages);
 
 function findBook(array, title) {
   let output;
@@ -60,22 +60,25 @@ findBook(booksArray, "java");
 
 // letterFrequency("kallle") // => {"k": 1. "a": 1, "l": 2, "e": 1}
 // letterFrequency("aaaa") // => {"a": 4}
-letterFrequency("ni talar bra latin"); // => {"n": 2, "i":2, " ":3, "t":2, "a":4,"l": 2,"r":2", "b":1 }
+// letterFrequency("ni talar bra latin"); // => {"n": 2, "i":2, " ":3, "t":2, "a":4,"l": 2,"r":2", "b":1 }
 
 function letterFrequency(str) {
   let letters = {};
-  for (let i = 0; i < str.length; i++) {
-    console.log(str[i]);
-    if (str[i] in letters) {
-      letters[`${str[i]}`] += 1;
-    } else {
-      letters[`${str[i]}`] = 1;
-    }
+  // for (let i = 0; i < str.length; i++) {
+  //   console.log(str[i]);
+  //   if (letters[str[i]]) {
+  //     letters[str[i]]++;
+  //   } else {
+  //     letters[str[i]] = 1;
+  //   }
+  // }
+  for (let i in str) {
+    letters[str[i]] ? letters[str[i]]++ : (letters[str[i]] = 1);
   }
   console.log(letters);
 }
 
-console.log(users);
+// console.log(users);
 
 function filtreraMedLand(arr, nation) {
   let filtreraMedLand = [];
@@ -88,7 +91,7 @@ function filtreraMedLand(arr, nation) {
   console.log(filtreraMedLand.length);
 }
 
-filtreraMedLand(users, "FR");
+// filtreraMedLand(users, "FR");
 
 function filterByCountry(arr, nat) {
   let filteredArray = [];
@@ -123,6 +126,7 @@ function changeEmails(arr, newDomain) {
     let splittedName = splittedEmail[0].split(".");
     let firstName = splittedName[0];
     let secondName = splittedName[1];
+    // let [firstName, secondName] = splittedEmail
     //   let newEmail = secondName + '.' + firstName + '@' + newDomain
     let newEmail = `${secondName}.${firstName}@${newDomain}`;
     console.log(newEmail);
@@ -149,7 +153,7 @@ let program = [
   "jnz a -2",
   "add a b",
 ];
-interpret(program);
+// interpret(program);
 
 function interpret(arr) {
   let output = {};
@@ -222,3 +226,23 @@ function interpret(arr) {
 }
 
 // output[element]++
+
+const array = ["Kalle", "David", "Nour", "tu", "Anna"];
+chooseRandom(array);
+
+function chooseRandom(arr) {
+  let random = Math.random();
+  let length = arr.length;
+  let multi = random * length;
+  let index = parseInt(multi);
+  let floor = Math.floor(multi);
+  let ceil = Math.ceil(multi);
+
+  // let index = parseInt(Math.random() * arr.length);
+  if (arr[index] === "undefined") {
+    chooseRandom(arr);
+  }
+  console.log(arr[index]);
+  console.log(index);
+  return arr[index];
+}
