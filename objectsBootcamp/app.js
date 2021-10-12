@@ -70,7 +70,8 @@ function letterFrequency(str) {
     console.log(str[i]);
     const stringLetter = str[i];
     if (letters[stringLetter]) {
-      letters[str[i]]++;
+      // letters[str[i]]++;
+      letters[str[i]] = letters[str[i]] + 1;
     } else {
       letters[str[i]] = 1;
     }
@@ -111,14 +112,15 @@ function filterByCountry(arr, nat) {
 }
 
 const male = "Mr";
-const female = "Ms, Mrs, Mss";
+const female = "Ms, Mrs, Miss, mademoiselle";
 
-function filterByGender(arr, nat) {
-  let filteredArray = [];
+function filterByCountry(arr, title) {
+  let userByGivenGender = [];
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i].nat === nat) {
+    const user = arr[i];
+    if (user.name.title === title) {
       //   filteredArray= [...filteredArray, arr[i]]
-      filteredArray.push(arr[i]);
+      userByGivenGender.push(user);
     }
   }
   console.log(filteredArray);
