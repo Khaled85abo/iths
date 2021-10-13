@@ -19,21 +19,23 @@ const booksArray = [
     numPages: 250,
   },
   {
-    title: "Java",
     author: "Fredrik",
+    title: "Java",
     numPages: 2500,
   },
   {
+    numPages: 230,
     title: "C#",
     author: "Joakim",
-    numPages: 230,
   },
   {
     title: "C++",
-    author: "Per",
     numPages: 2,
+    author: "Per",
   },
 ];
+
+const bookArray = ["C#", "js", "java"];
 
 // console.log(booksArray[0].numPages);
 
@@ -50,7 +52,7 @@ function findBook(array, title) {
   return output;
 }
 
-findBook(booksArray, "java");
+findBook(booksArray, "lord of the rings");
 
 // Räkna tecken i en sträng och organisera detta i ett objekt. Skapa en funktion som tar en sträng som input och ger ett objekt som output.
 
@@ -58,23 +60,25 @@ findBook(booksArray, "java");
 
 // Denna övning kräver dynamiska nycklar.
 
-// letterFrequency("kallle") // => {"k": 1. "a": 1, "l": 2, "e": 1}
+// letterFrequency("kalle") // => {"k": 1. "a": 1, "l": 2, "e": 1}
 // letterFrequency("aaaa") // => {"a": 4}
 // letterFrequency("ni talar bra latin"); // => {"n": 2, "i":2, " ":3, "t":2, "a":4,"l": 2,"r":2", "b":1 }
 
 function letterFrequency(str) {
   let letters = {};
-  // for (let i = 0; i < str.length; i++) {
-  //   console.log(str[i]);
-  //   if (letters[str[i]]) {
-  //     letters[str[i]]++;
-  //   } else {
-  //     letters[str[i]] = 1;
-  //   }
-  // }
-  for (let i in str) {
-    letters[str[i]] ? letters[str[i]]++ : (letters[str[i]] = 1);
+  for (let i = 0; i < str.length; i++) {
+    console.log(str[i]);
+    const stringLetter = str[i];
+    if (letters[stringLetter]) {
+      // letters[str[i]]++;
+      letters[str[i]] = letters[str[i]] + 1;
+    } else {
+      letters[str[i]] = 1;
+    }
   }
+  // for (let i in str) {
+  //   letters[str[i]] ? letters[str[i]]++ : (letters[str[i]] = 1);
+  // }
   console.log(letters);
 }
 
@@ -91,29 +95,44 @@ function filtreraMedLand(arr, nation) {
   console.log(filtreraMedLand.length);
 }
 
-// filtreraMedLand(users, "FR");
+console.log(users);
+filtreraMedLand(users, "FR");
 
 function filterByCountry(arr, nat) {
   let filteredArray = [];
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i].nat === nat) {
+    const user = arr[i];
+    if (user.nat === nat) {
       //   filteredArray= [...filteredArray, arr[i]]
-      filteredArray.push(arr[i]);
+      filteredArray.push(user);
     }
   }
   console.log(filteredArray);
   return filteredArray;
 }
 
-const male = "male";
-const female = "female";
+const male = "Mr";
+const female = "Ms, Mrs, Miss, mademoiselle";
+
+function filterByCountry(arr, title) {
+  let userByGivenGender = [];
+  for (let i = 0; i < arr.length; i++) {
+    const user = arr[i];
+    if (user.name.title === title) {
+      //   filteredArray= [...filteredArray, arr[i]]
+      userByGivenGender.push(user);
+    }
+  }
+  console.log(filteredArray);
+  return filteredArray;
+}
 
 function justEmails(arr) {
   let emails = [];
   for (let i = 0; i < arr.length; i++) {
     emails.push(arr[i].email);
   }
-  console.log(emails);
+  // console.log(emails);
   return emails;
 }
 
