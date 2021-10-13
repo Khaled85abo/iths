@@ -1,3 +1,19 @@
+const checkSelector = (selector, isList) => {
+  const el = isList
+    ? [...document.querySelectorAll(selector)]
+    : document.querySelector(selector);
+  if (isList && el.length > 1) return el;
+  if (!isList && el) return el;
+  // if (isList && !el.length < 1) return el
+
+  //arguments in one line
+  //if((!isList && el) || (isList && !el.length < 1)) return el
+  throw new Error(`Element does not exist: ${selector}`);
+};
+
+const buttons = checkSelector("button", true);
+console.log(buttons);
+
 //1. Byt namn på första hoodien från Ash till Potato.
 const ash = document.querySelector(".art-1 h3");
 ash.innerText = "Potato";
@@ -53,23 +69,30 @@ const logo = document.querySelector("img:first-of-type");
 logo.classList.remove("logo");
 
 // 12. Lägg till ett nytt menyalternativ.
-const a = document.createElement("a");
-a.href = "#";
-a.innerText = "WHy us";
-const menu = document.querySelector("nav");
-console.log(menu);
-menu.append(a);
+// const a = document.createElement("a");
+// a.href = "#";
+// a.innerText = "WHy us";
+// const menu = document.querySelector("nav");
+// console.log(menu);
+// menu.append(a);
+
+// const nav = document.querySelector("nav");
+// nav.insertAdjacentHTML("beforeend", "<a href='#'>Why Us</a>");
+
+const contactAnkor = document.querySelector("nav > a:nth-of-type(3)");
+contactAnkor.insertAdjacentHTML("beforebegin", "<a href='#'>Why Us</a>");
 
 // 13. Lägg till en ny produkt med följande info.
-const product = document.createElement("article");
-product.classList.add("art-4");
 
-product.innerHTML = `
+const main = document.querySelector("main");
+
+const newProduct = `
+ <article class="art-4">
     <figure><img src="img/hoodie-forrest.png" alt="hoodie"></figure>
     <h2>Sinus Hoodie</h2>
     <h3>Forrest</h3>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus doloremque ducimus enim!</p>
     <button>buy</button>
+  </article>
 `;
-const main = document.querySelector("main");
-main.append(product);
+main.insertAdjacentHTML("beforeend", newProduct);
