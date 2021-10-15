@@ -1,10 +1,10 @@
 // Password validation - Without RegExp
 function validatePassword(pwd) {
-  if (pwd.length < 8) return false;
-  if (pwd.length > 50) return false;
-  if (!conatinsUpperCaseLetter(pwd)) return false;
-  if (!conatinsLowerCaseLetter(pwd)) return false;
-  if (!containsSpecialCharacter(pwd)) return false;
+  // if (pwd.length < 8) return false;
+  // if (pwd.length > 50) return false;
+  // if (!conatinsUpperCaseLetter(pwd)) return false;
+  // if (!conatinsLowerCaseLetter(pwd)) return false;
+  // if (!containsSpecialCharacter(pwd)) return false;
   // if (
   //   pwd.length < 8 ||
   //   pwd.length > 50 ||
@@ -15,24 +15,25 @@ function validatePassword(pwd) {
   //   return false;
   // }
 
-  // if (pwd.length < 8 && pwd.length > 50) {
-  //   return false;
-  // }
-  // // if (pwd.length > 50) {
-  // //   return false;
-  // // }
-  // if (!conatinsUpperCaseLetter(pwd)) {
-  //   return false;
-  // }
-  // if (!conatinsLowerCaseLetter(pwd)) {
-  //   return false;
-  // }
-  // if (!containsNumber(pwd)) {
-  //   return false;
-  // }
-  // if (!containsSpecialCharacter(pwd)) {
-  //   return false;
-  // }
+  if (pwd.length < 8) {
+    return false;
+  }
+
+  if (pwd.length > 50) {
+    return false;
+  }
+  if (!conatinsUpperCaseLetter(pwd)) {
+    return false;
+  }
+  if (!conatinsLowerCaseLetter(pwd)) {
+    return false;
+  }
+  if (!containsNumber(pwd)) {
+    return false;
+  }
+  if (!containsSpecialCharacter(pwd)) {
+    return false;
+  }
 
   return true;
 }
@@ -45,8 +46,8 @@ function conatinsUpperCaseLetter(str) {
   return false;
 }
 function conatinsLowerCaseLetter(str) {
-  for (let i in str) {
-    if (str[i] === str[i].toLowerCase() && str[i] !== str[i].toUpperCase())
+  for (let value of str) {
+    if (value === value.toLowerCase() && value !== value.toUpperCase())
       return true;
   }
   return false;

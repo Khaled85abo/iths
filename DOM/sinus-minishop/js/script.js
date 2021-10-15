@@ -2,7 +2,7 @@ const checkSelector = (selector, isList) => {
   const el = isList
     ? [...document.querySelectorAll(selector)]
     : document.querySelector(selector);
-  if (isList && el.length > 1) return el;
+  if (isList && el.length >= 1) return el;
   if (!isList && el) return el;
   // if (isList && !el.length < 1) return el
 
@@ -12,7 +12,7 @@ const checkSelector = (selector, isList) => {
 };
 
 const buttons = checkSelector("button", true);
-console.log(buttons);
+console.log(buttons[0].innerText);
 
 //1. Byt namn på första hoodien från Ash till Potato.
 const ash = document.querySelector(".art-1 h3");
@@ -32,7 +32,6 @@ informationFire.innerText = "Here comes new informatio about the new hoodie";
 
 // 5. Byt bakgrundsfärg och text på en knapp.
 const firstDomBtn = document.querySelector("button");
-firstDomBtn.innerText = "BUTTON";
 firstDomBtn.style.background = "red";
 
 // 6. Byt bakgrundsfärg på någon av produkterna.
@@ -56,10 +55,10 @@ for (let i = 0; i < AllP.length; i++) {
 }
 
 //9. Ändra text på samtliga knappar till add to cart.
-const allBtns = document.querySelectorAll("button");
-for (let i = 0; i < allBtns.length; i++) {
-  allBtns[i].innerText = "add to cart";
-}
+// const allBtns = document.querySelectorAll("button");
+// for (let i = 0; i < allBtns.length; i++) {
+//   allBtns[i].innerText = "add to cart";
+// }
 
 // 10. Lägg till classen active på menyalternativet home.
 home.classList.add("active");
@@ -92,7 +91,7 @@ const newProduct = `
     <h2>Sinus Hoodie</h2>
     <h3>Forrest</h3>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus doloremque ducimus enim!</p>
-    <button>buy</button>
+             <button>buy</button>
   </article>
 `;
 main.insertAdjacentHTML("beforeend", newProduct);

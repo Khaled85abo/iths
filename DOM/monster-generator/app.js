@@ -1,4 +1,5 @@
 deployMonster(monsters);
+
 function deployMonster(monsters) {
   const main = document.querySelector("main");
   const monster = monsters[Math.floor(Math.random() * monsters.length)];
@@ -8,6 +9,7 @@ function deployMonster(monsters) {
     powers: { health = 10, defense },
     styling: { circle, imgBgd },
   } = monster;
+
   const monsterArticle = `<article>
                             <figure>
                             <span></span>
