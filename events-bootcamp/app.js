@@ -48,6 +48,12 @@
 
 function main() {
   const input = document.querySelector("input");
+  input.insertAdjacentHTML("beforebegin", `<p></p>`);
+  input.insertAdjacentHTML(
+    "afterend",
+    `<select name="cars" id="options">
+     </select>`
+  );
   input.addEventListener("input", addColor);
   input.addEventListener("change", changeBackground);
 }
@@ -57,7 +63,6 @@ function addColor() {
   let colorsSuggestion = [];
 
   const input = document.querySelector("input").value;
-  colorsSuggestion = [];
   if (input.length < 3) {
     for (let color of colors) {
       if (color[0] == input[0]) {
@@ -72,9 +77,12 @@ function addColor() {
     }
   }
   console.log(colorsSuggestion);
-  document
-    .querySelector("input")
-    .insertAdjacentHTML("afterend", `<p>${colorsSuggestion}</p>`);
+  document.querySelector("p").innerText = colorsSuggestion;
+
+  const options = colorsSuggestion.map(
+    (color) => `<option value="${color}">${color}</option>`
+  );
+  document.querySelector("#options").innerHTML = options;
 }
 
 function changeBackground(e) {
@@ -85,7 +93,6 @@ function changeBackground(e) {
     }
   }
 
-  // Ternary operator
   // colorExist
   //   ? (document.body.style.background = e.target.value)
   //   : alert("color doesn't exist");
@@ -106,28 +113,22 @@ function changeBackground(e) {
 // }
 
 function contains(color, input) {
-  let result = false;
   for (let i = 0; i < color.length; i++) {
     if (color[i] === input[0]) {
-      result = checkAllChars(color, input, i);
-      if (result) return result;
+      if (checkAllChars(color, input, i)) return true;
     }
   }
-  return result;
+  return false;
 }
 
 function checkAllChars(str1, str2, start) {
-  str1;
-  str2;
-  start;
-  let output = true;
   for (let i = 0; i < str2.length; i++) {
     if (str1[i + start] !== str2[i]) {
-      output = false;
+      return false;
     }
   }
 
-  return output;
+  return true;
 }
 
 // const input = document.querySelector("input");
@@ -148,13 +149,17 @@ function createPassword() {
   const capitalLetters = "ABCDEFGHIJKLMNOQRSTUVWXYZ";
   const smallLetters = "abcdefghijklmnopqrstuvwxyz";
   const specialChars = "!@#$%^&*()_+=-[]/'";
+  const noNumbers =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+=-[]/'";
+
   const allChars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789123456789!@#$%^&*()_+=-[]/'";
   let pwd = "";
 
   for (let i = 0; i < 8; i++) {
-    if (i === 1 && Number.isInteger(Number(pwd[0]))) {
-      createPassword();
+    if (i === 0) {
+      const index = Math.floor(Math.random() * noNumbers.length);
+      pwd += noNumbers[index];
     }
     const index = Math.floor(Math.random() * allChars.length);
     pwd += allChars[index];

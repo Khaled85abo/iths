@@ -123,3 +123,75 @@ persistence(999);
 persistence(9);
 persistence(12);
 persistence(12);
+
+// Array Difference
+
+arrayDiff([1, 2], [1]); // [2]
+arrayDiff([1, 2, 2, 2, 3], [2]); //[1,3]
+arrayDiff([], [4, 5]); //[]
+arrayDiff([3, 4], [3]); //[4]
+arrayDiff([1, 8, 2], []); //[1,8,2]
+arrayDiff([1, 2, 3], [1, 2]); //[3]
+
+// my solution
+function arrayDiff(a, b) {
+  let result = [];
+  for (let i = 0; i < a.length; i++) {
+    let exist = false;
+    for (let el of b) {
+      if (el === a[i]) {
+        exist = true;
+      }
+    }
+    !exist && result.push(a[i]);
+  }
+  console.log(result);
+  return result;
+}
+
+function array_diff(a, b) {
+  return a.filter((e) => !b.includes(e));
+}
+
+function array_diff(a, b) {
+  return a.filter(function (x) {
+    return b.indexOf(x) == -1;
+  });
+}
+
+function array_diff(a, b) {
+  return a.filter((v) => b.indexOf(v));
+}
+
+function array_diff(a, b) {
+  b = new Set(b);
+  return a.filter((v) => !b.has(v));
+}
+
+function array_diff(a, b) {
+  let set = new Set(b);
+  return a.map((x) => (!set.has(x) ? x : null)).filter((x) => x);
+}
+
+function array_diff(a, b) {
+  return a.filter(function (x) {
+    var bool = true;
+    b.forEach(function (y) {
+      if (x == y) bool = false;
+    });
+    return bool;
+  });
+}
+
+function array_diff(a, b) {
+  return a.filter(function (val) {
+    return b[0] != val;
+  });
+}
+
+function arrayDiff(a, b) {
+  b.forEach(
+    (value_in_b) => (a = a.filter((vaulue_in_a) => vaulue_in_a !== value_in_b))
+  );
+  return a;
+}
