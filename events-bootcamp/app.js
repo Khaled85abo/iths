@@ -143,7 +143,7 @@ function checkAllChars(str1, str2, start) {
 //   console.log(e.target.value);
 //   p.innerHTML = e.target.value;
 // }
-
+/*
 function createPassword() {
   const numbers = "123456789";
   const capitalLetters = "ABCDEFGHIJKLMNOQRSTUVWXYZ";
@@ -182,6 +182,35 @@ function createPassword() {
   }
 
   console.log(pwd.length);
+  console.log(pwd);
+  return pwd;
+}
+
+// The following function create a forever loop sometimes
+function create_password() {
+  const allChars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789123456789!@#$%^&*()_+=-[]/'";
+  let pwd = "";
+  for (let i = 0; i < 25; i++) {
+    if (i === 1 && Number.isInteger(Number(pwd[0]))) {
+      create_password();
+    }
+
+    const index = Math.floor(Math.random() * allChars.length);
+    pwd += allChars[index];
+  }
+  if (!containsNumber(pwd)) {
+    create_password();
+  }
+  if (!containsCaptialLetter(pwd)) {
+    create_password();
+  }
+  if (!containsLowerLetter(pwd)) {
+    create_password();
+  }
+  if (!containsSpecialCharacter(pwd)) {
+    create_password();
+  }
   console.log(pwd);
   return pwd;
 }
@@ -228,3 +257,5 @@ function containsSpecialCharacter(pwd) {
 
   return false;
 }
+
+*/
