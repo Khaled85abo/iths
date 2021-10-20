@@ -1,5 +1,7 @@
 // filter out non numbers
 
+const arr = ["h", "1", 3, "h", 5];
+
 function filter_list(l) {
   return l.filter((e) => Number.isInteger(e));
 }
@@ -17,8 +19,8 @@ function filter_list(l) {
 
 function filter_list(l) {
   // Return a new array with the strings filtered out
-  var filteredList = [];
-  for (var i = 0; i < l.length; i++) {
+  let filteredList = [];
+  for (let i = 0; i < l.length; i++) {
     if (l[i].constructor.name !== "String") {
       filteredList.push(l[i]);
     }

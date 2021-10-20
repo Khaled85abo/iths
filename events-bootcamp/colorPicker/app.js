@@ -48,20 +48,20 @@
 
 function main() {
   const input = document.querySelector("input");
-  input.insertAdjacentHTML("beforebegin", `<p></p>`);
-  input.insertAdjacentHTML(
-    "afterend",
-    `<select name="cars" id="options">
-     </select>`
-  );
-  input.addEventListener("input", addColor);
-  input.addEventListener("change", changeBackground);
+
+  // input.insertAdjacentHTML(
+  //   "afterend",
+  //   `<select name="cars" id="options">
+  //    </select>`
+  // );
+  input.addEventListener("input", provideSuggestions);
+  input.addEventListener("keydown", changeBackground);
 }
 main();
 
-function addColor() {
+function provideSuggestions() {
   let colorsSuggestion = [];
-
+  document.querySelector("p").innerHTML = "";
   const input = document.querySelector("input").value;
   if (input.length < 3) {
     for (let color of colors) {
@@ -77,15 +77,25 @@ function addColor() {
     }
   }
   console.log(colorsSuggestion);
-  document.querySelector("p").innerText = colorsSuggestion;
+  const list = document.querySelector("ul");
 
-  const options = colorsSuggestion.map(
-    (color) => `<option value="${color}">${color}</option>`
-  );
-  document.querySelector("#options").innerHTML = options;
+  const options = colorsSuggestion.map((color) => `<li>${color}</li>`);
+  console.log("options: ", options);
+  list.innerHTML = options.join("");
+
+  const listItems = document.querySelectorAll("li");
+  for (let item of listItems) {
+    item.addEventListener("click", (e) => {
+      document.body.style.background = e.target.innerText;
+    });
+  }
 }
 
 function changeBackground(e) {
+  const errorDiv = document.querySelector("p");
+  if (e.code !== "Enter") {
+    return;
+  }
   let colorExist = false;
   for (let color of colors) {
     if (color == e.target.value) {
@@ -93,9 +103,11 @@ function changeBackground(e) {
     }
   }
 
-  // colorExist
-  //   ? (document.body.style.background = e.target.value)
-  //   : alert("color doesn't exist");
+  colorExist
+    ? (document.body.style.background = e.target.value)
+    : (errorDiv.innerHTML = "color doesn't exist");
+
+  errorDiv.style.color = "red";
 }
 
 // function contains(color, input) {
