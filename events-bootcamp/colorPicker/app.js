@@ -46,43 +46,47 @@
 //   }
 // }
 
-function main() {
-  const input = document.querySelector("input");
+const labelDiv = document.querySelector("label");
+const input = document.querySelector("input");
+const ul = document.querySelector("ul");
 
-  // input.insertAdjacentHTML(
-  //   "afterend",
-  //   `<select name="cars" id="options">
-  //    </select>`
-  // );
-  input.addEventListener("input", provideSuggestions);
-  input.addEventListener("keydown", changeBackground);
-}
-main();
+// input.insertAdjacentHTML(
+//   "afterend",
+//   `<select name="cars" id="options">
+//    </select>`
+// );
+input.addEventListener("input", provideSuggestions);
+input.addEventListener("keydown", changeBackground);
 
 function provideSuggestions() {
   let colorsSuggestion = [];
-  document.querySelector("p").innerHTML = "";
-  const input = document.querySelector("input").value;
-  if (input.length < 3) {
+  labelDiv.innerHTML = "Type a Color";
+  labelDiv.style.color = "#3aabf1";
+
+  const inputValue = input.value;
+  if (inputValue.length < 3) {
     for (let color of colors) {
-      if (color[0] == input[0]) {
+      if (color[0] == inputValue[0]) {
         colorsSuggestion.push(color);
       }
     }
   } else {
     for (let color of colors) {
-      if (contains(color, input)) {
+      if (contains(color, inputValue)) {
         colorsSuggestion.push(color);
       }
     }
   }
   console.log(colorsSuggestion);
-  const list = document.querySelector("ul");
 
-  const options = colorsSuggestion.map((color) => `<li>${color}</li>`);
+  const options = colorsSuggestion.map(
+    (color) => `<li>${color} <div style='background: ${color}'></div></li>`
+  );
   console.log("options: ", options);
-  list.innerHTML = options.join("");
-
+  ul.innerHTML = options.join("");
+  // ul.style.visibility = "visible";
+  // ul.style.opacity = "1";
+  // ul.style.display = "block";
   const listItems = document.querySelectorAll("li");
   for (let item of listItems) {
     item.addEventListener("click", (e) => {
@@ -92,7 +96,6 @@ function provideSuggestions() {
 }
 
 function changeBackground(e) {
-  const errorDiv = document.querySelector("p");
   if (e.code !== "Enter") {
     return;
   }
@@ -105,10 +108,17 @@ function changeBackground(e) {
 
   colorExist
     ? (document.body.style.background = e.target.value)
-    : (errorDiv.innerHTML = "color doesn't exist");
+    : manageError();
 
-  errorDiv.style.color = "red";
+  labelDiv.style.color = "red";
 }
+
+const manageError = () => {
+  labelDiv.innerHTML = "Color doesn't exist";
+  setTimeout(() => {
+    labelDiv.innerHTML = "Try again!";
+  }, 1500);
+};
 
 // function contains(color, input) {
 //   for (let i = 0; i < color.length; i++) {
