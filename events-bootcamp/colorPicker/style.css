@@ -68,6 +68,7 @@ ul li {
   box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
 }
 ul li > div {
+  /* background: attr(data-background); */
   position: absolute;
   height: 20px;
   width: 20px;
@@ -76,3 +77,7 @@ ul li > div {
   top: 50%;
   transform: translateY(-50%);
 }
+
+/* .div[data-background] {
+  background-color: attr(data-background);
+} */

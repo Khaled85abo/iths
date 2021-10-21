@@ -63,7 +63,7 @@ function provideSuggestions() {
   labelDiv.innerHTML = "Type a Color";
   labelDiv.style.color = "#3aabf1";
 
-  const inputValue = input.value;
+  const inputValue = input.value.toLowerCase();
   if (inputValue.length < 3) {
     for (let color of colors) {
       if (color[0] == inputValue[0]) {
@@ -71,16 +71,21 @@ function provideSuggestions() {
       }
     }
   } else {
+    // Get matching colors with custimized function
     for (let color of colors) {
       if (contains(color, inputValue)) {
         colorsSuggestion.push(color);
       }
     }
+
+    // Get matching colors with methods
+    // colorsSuggestion = colors.filter(color => color.includes(input))
   }
   console.log(colorsSuggestion);
 
   const options = colorsSuggestion.map(
-    (color) => `<li>${color} <div style='background: ${color}'></div></li>`
+    (color) =>
+      `<li>${color} <div  data-background="${color}" class="div" style="background:${color}"></div></li>`
   );
   console.log("options: ", options);
   ul.innerHTML = options.join("");
@@ -152,132 +157,3 @@ function checkAllChars(str1, str2, start) {
 
   return true;
 }
-
-// const input = document.querySelector("input");
-// input.oninput = handleInput;
-
-// // 1
-// const p = document.createElement("p");
-// const body = document.body;
-// body.appendChild(p);
-
-// function handleInput(e) {
-//   console.log(e.target.value);
-//   p.innerHTML = e.target.value;
-// }
-/*
-function createPassword() {
-  const numbers = "123456789";
-  const capitalLetters = "ABCDEFGHIJKLMNOQRSTUVWXYZ";
-  const smallLetters = "abcdefghijklmnopqrstuvwxyz";
-  const specialChars = "!@#$%^&*()_+=-[]/'";
-  const noNumbers =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+=-[]/'";
-
-  const allChars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789123456789!@#$%^&*()_+=-[]/'";
-  let pwd = "";
-
-  for (let i = 0; i < 8; i++) {
-    if (i === 0) {
-      const index = Math.floor(Math.random() * noNumbers.length);
-      pwd += noNumbers[index];
-    }
-    const index = Math.floor(Math.random() * allChars.length);
-    pwd += allChars[index];
-  }
-  if (!containsNumber(pwd)) {
-    const numberIndex = Math.floor(Math.random() * numbers.length);
-    pwd += numbers[numberIndex];
-  }
-  if (!containsCaptialLetter(pwd)) {
-    const captialIndex = Math.floor(Math.random() * capitalLetters.length);
-    pwd += capitalLetters[captialIndex];
-  }
-  if (!containsLowerLetter(pwd)) {
-    const smalIndex = Math.floor(Math.random() * smallLetters.length);
-    pwd += smallLetters[smalIndex];
-  }
-  if (!containsSpecialCharacter(pwd)) {
-    const specialIndex = Math.floor(Math.random() * specialChars.length);
-    pwd += specialChars[specialIndex];
-  }
-
-  console.log(pwd.length);
-  console.log(pwd);
-  return pwd;
-}
-
-// The following function create a forever loop sometimes
-function create_password() {
-  const allChars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789123456789!@#$%^&*()_+=-[]/'";
-  let pwd = "";
-  for (let i = 0; i < 25; i++) {
-    if (i === 1 && Number.isInteger(Number(pwd[0]))) {
-      create_password();
-    }
-
-    const index = Math.floor(Math.random() * allChars.length);
-    pwd += allChars[index];
-  }
-  if (!containsNumber(pwd)) {
-    create_password();
-  }
-  if (!containsCaptialLetter(pwd)) {
-    create_password();
-  }
-  if (!containsLowerLetter(pwd)) {
-    create_password();
-  }
-  if (!containsSpecialCharacter(pwd)) {
-    create_password();
-  }
-  console.log(pwd);
-  return pwd;
-}
-
-const pss = createPassword();
-
-function containsNumber(pwd) {
-  for (let letter of pwd) {
-    if (Number.isInteger(Number(letter))) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function containsCaptialLetter(pwd) {
-  for (let letter of pwd) {
-    if (letter == letter.toUpperCase() && letter != letter.toLowerCase()) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function containsLowerLetter(pwd) {
-  for (let letter of pwd) {
-    if (letter == letter.toLowerCase() && letter != letter.toUpperCase()) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-function containsSpecialCharacter(pwd) {
-  const chrs = "!@#$%^&*()_+=-[]/'";
-  for (let letter of pwd) {
-    for (let chr of chrs) {
-      if (letter == chr) {
-        return true;
-      }
-    }
-  }
-
-  return false;
-}
-
-*/

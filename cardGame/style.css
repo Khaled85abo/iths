@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: mediumaquamarine;
+}
+
+header {
+  padding: 1rem;
+}
+
+main {
+  text-align: center;
+  min-height: 60vh;
+}
+
+main > article {
+  border-radius: 4px;
+  background-color: white;
+  padding: 0.5rem;
+  width: 15rem;
+  aspect-ratio: 4/6;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+main > article > div span:nth-child(1) {
+  font-size: 3rem;
+  color: red;
+}
+main > article > div span:nth-child(2) {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+main > article > div:nth-child(2) > span {
+  font-size: 7rem;
+}
+main > article > div:nth-child(1),
+main > article > div:nth-of-type(3) {
+  display: flex;
+  flex-direction: column;
+}
+
+main > article > div:nth-child(1) {
+  align-self: flex-start;
+}
+main > article > div:nth-of-type(3) {
+  align-self: flex-end;
+  transform: rotate(180deg);
+}
+
+main > p {
+  margin-top: 1rem;
+}
+footer {
+  text-align: center;
+}
+
+footer > section > button {
+  width: 15rem;
+  background-color: transparent;
+  padding: 0.5rem 3rem;
+  margin-top: 1rem;
+}
+@media only screen and (min-width: 700px) {
+  footer > section {
+    display: flex;
+    justify-content: center;
+  }
+  footer > section > button {
+    padding: 0.8rem 3rem;
+  }
+  footer > section > button:nth-child(1) {
+    border-radius: 6px 0 0 6px;
+  }
+  footer > section > button:nth-child(3) {
+    border-radius: 0 6px 6px 0;
+  }
+}
