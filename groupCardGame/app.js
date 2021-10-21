@@ -70,9 +70,7 @@ function guessedWrong() {
       btn.disabled = true;
     }
     var tryAgain = prompt(`you got ${points} points,Write again to play again`);
-    if (tryAgain == "again") {
-      location.reload();
-    }
+    tryAgain === "again" && location.reload();
   }
 }
 
@@ -86,10 +84,7 @@ function chooseAndDeployCard() {
   // Updating my cards array by removing the choosen card
   cards.splice(index, 1);
 
-  let className = "black";
-  if (suit == "♦" || suit == "♥") {
-    className = "red";
-  }
+  let className = suit == "♦" || suit == "♥" ? "red" : "black";
   const newArticle = `   <article class="card ${className}">
         <div >
           <p >${suit}</p>
