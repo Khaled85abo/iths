@@ -58,9 +58,10 @@ const checkResponse = (e) => {
   console.log(presentCard);
   showRightCard(card);
   hideCardCover();
+  changePlace();
+
   const pres = Number(presentCard.value);
   const prev = Number(previousCard.value);
-  changePlace();
 
   let result = false;
 
@@ -85,7 +86,9 @@ const checkResponse = (e) => {
     result = true;
   }
 
-  result ? guessedRight() : guessedWrong();
+  setTimeout(() => {
+    result ? guessedRight() : guessedWrong();
+  }, 2700);
 };
 
 for (let btn of btns) {
