@@ -1,0 +1,84 @@
+body {
+  background: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0;
+  height: 100vh;
+}
+
+.card {
+  width: 11rem;
+  height: 16rem;
+  border-radius: 3px;
+  background: rgb(243, 179, 211);
+  position: absolute;
+  transform-origin: center bottom;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+.card:nth-child(1) {
+  transform: translateX(1.5rem);
+  background: rgb(255, 9, 9);
+}
+.card:nth-child(2) {
+  transform: translateX(1rem);
+  background: rgb(250, 250, 48);
+}
+.card:nth-child(3) {
+  transform: translateX(0.5rem);
+  background: rgb(250, 250, 48);
+}
+.card:nth-child(4) {
+  transform: translateX(-1.5rem);
+  background: rgb(87, 255, 65);
+}
+.card:nth-child(5) {
+  transform: translateX(-0.5rem);
+  background: rgb(55, 207, 136);
+}
+.card:nth-child(6) {
+  transform: translateX(-1rem);
+  background: rgb(94, 235, 253);
+}
+.card:nth-child(7) {
+  transform: translateX(-1.5rem);
+  background: rgb(106, 116, 252);
+}
+.card:nth-child(8) {
+  transform: translateX(-2rem);
+  background: rgb(199, 119, 245);
+}
+.card:nth-child(9) {
+  transform: translateX(-2rem);
+  background: rgb(243, 179, 211);
+}
+
+body:hover .card:nth-child(1) {
+  transform: translateX(2rem) rotateZ(40deg);
+}
+body:hover .card:nth-child(2) {
+  transform: translateX(1.5rem) rotateZ(30deg);
+}
+body:hover .card:nth-child(3) {
+  transform: translateX(1rem) rotateZ(20deg);
+}
+body:hover .card:nth-child(4) {
+  transform: translateX(0.5rem) rotateZ(10deg);
+}
+body:hover .card:nth-child(5) {
+  transform: translateX(0rem) rotateZ(0deg);
+}
+body:hover .card:nth-child(6) {
+  transform: translateX(0.5rem) rotateZ(-10deg);
+}
+body:hover .card:nth-child(7) {
+  transform: translateX(-1rem) rotateZ(-20deg);
+}
+body:hover .card:nth-child(8) {
+  transform: translateX(-1.5rem) rotateZ(-30deg);
+}
+body:hover .card:nth-child(9) {
+  transform: translateX(-2rem) rotateZ(-40deg);
+}

@@ -34,13 +34,15 @@ const btns = document.querySelectorAll("footer button");
 attemptsDiv.innerText = attempts;
 pointsDiv.innerText = points;
 
-console.log(cards);
+// console.log(cards);
 chooseAndDeployCard();
 
 const checkResponse = (e) => {
   let result;
   const response = e.target.innerText;
-
+  const attr = e.target.getAttribute("data-response");
+  //  const attr = e.target.dataset.response
+  // console.log(attr);
   previousCard = presentCard;
   chooseAndDeployCard();
   const prev = Number(presentCard.value);
@@ -84,8 +86,9 @@ function chooseAndDeployCard() {
   // Updating my cards array by removing the choosen card
   cards.splice(index, 1);
 
-  let className = suit == "♦" || suit == "♥" ? "red" : "black";
-  const newArticle = `   <article class="card ${className}">
+  const className = suit == "♦" || suit == "♥" ? "red" : "black";
+  const newArticle = `   
+    <article class="card ${className}">
         <div >
           <p >${suit}</p>
           <p>${value}</p>
@@ -97,13 +100,22 @@ function chooseAndDeployCard() {
           <p>${suit}</p>
           <p>${value}</p>
         </div>
-      </article>
-      <p><b>${cards.length}</b> Cards Left</p>`;
+    </article>
+    <p><b>${cards.length}</b> Cards Left</p>`;
   main.innerHTML = newArticle;
 }
 
 function evaluateChars(obj) {
-  let o = obj.value;
-  let value = o == "A" ? 1 : o == "J" ? 11 : o == "Q" ? 12 : o == "K" ? 13 : o;
+  const o = obj.value;
+  const value =
+    o == "A" ? 1 : o == "J" ? 11 : o == "Q" ? 12 : o == "K" ? 13 : o;
   return { value: value, suit: obj.suit };
+}
+
+function freshDeck() {
+  return SUITS.flatMap((suit) => {
+    return VALUES.map((value) => {
+      return new Card(suit, value);
+    });
+  });
 }

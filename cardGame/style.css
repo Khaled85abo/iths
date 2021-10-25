@@ -8,56 +8,126 @@ body {
   font-family: sans-serif;
   background-color: mediumaquamarine;
 }
+button {
+  cursor: pointer;
+}
 
 header {
   padding: 1rem;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
 }
 
+header > p:nth-of-type(2) {
+  color: gray;
+  font-size: 1.5rem;
+}
+header > p:nth-of-type(2) > span:last-child {
+  color: red;
+  display: inline-block;
+  margin-left: 1rem;
+  animation: infinite 1.2s animateHeart;
+}
+@keyframes animateHeart {
+  /* scale down and scale up faster in irregular intervals to get the throbbing effect */
+  0% {
+    transform: scale(1.6);
+  }
+  5% {
+    transform: scale(1.8);
+  }
+  10% {
+    transform: scale(1.6);
+  }
+  15% {
+    transform: scale(2);
+  }
+  50% {
+    transform: scale(1.6);
+  }
+  100% {
+    transform: scale(1.6);
+  }
+}
+.red {
+  color: red;
+}
+
+.black {
+  color: black;
+}
 main {
   text-align: center;
-  min-height: 60vh;
 }
 
-main > article {
+main > div {
+  position: relative;
+  align-self: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  min-height: 12rem;
+}
+
+.left {
+  grid-column: 1/2;
+  position: absolute;
+  margin: auto;
+  /* transition: all 1s ease-in-out; */
+}
+.right {
+  position: absolute;
+  margin: auto;
+  grid-column: 2/3;
+  transition: all 1s ease-in-out;
+}
+
+.card-flip-hide {
+  transition: all ease-in-out 1s;
+  transform: rotateY(90deg);
+}
+
+main > div article {
   border-radius: 4px;
+  margin: auto;
   background-color: white;
   padding: 0.5rem;
-  width: 15rem;
+  width: 8rem;
   aspect-ratio: 4/6;
-  margin: auto;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 4px 4px 16px 4px black;
 }
 
-main > article > div span:nth-child(1) {
-  font-size: 3rem;
-  color: red;
-}
-main > article > div span:nth-child(2) {
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-main > article > div:nth-child(2) > span {
-  font-size: 7rem;
-}
-main > article > div:nth-child(1),
-main > article > div:nth-of-type(3) {
-  display: flex;
-  flex-direction: column;
-}
-
-main > article > div:nth-child(1) {
+main > div article > div:nth-child(1) {
   align-self: flex-start;
+  padding-left: 0.5rem;
 }
-main > article > div:nth-of-type(3) {
+main > div article > div:nth-child(2) {
+  font-size: 2rem;
+}
+
+main > div article > div:nth-of-type(3) {
   align-self: flex-end;
+  padding-left: 0.5rem;
   transform: rotate(180deg);
 }
 
+main > div article > div:nth-child(1),
+main > div article > div:nth-of-type(3) {
+  font-size: 1.3rem;
+}
+
+main img {
+  width: 8.3rem;
+  transform: translateY(1.5%);
+  aspect-ratio: 4/6;
+}
 main > p {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 footer {
   text-align: center;
@@ -69,7 +139,11 @@ footer > section > button {
   padding: 0.5rem 3rem;
   margin-top: 1rem;
 }
+
 @media only screen and (min-width: 700px) {
+  main > div {
+    grid-row: 2/8;
+  }
   footer > section {
     display: flex;
     justify-content: center;
