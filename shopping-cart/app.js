@@ -13,6 +13,8 @@ function initState() {
 function initActions() {
   const buyBtns = document.querySelectorAll("main  article  button");
   buyBtns.forEach((btn) => btn.addEventListener("click", updateStateProducts));
+
+  // Adding NodeList of buy buttons to state to be accessiable by other functions.
   state.buyBtns = buyBtns;
 
   // Save products list to local storage.
@@ -44,7 +46,7 @@ function updateStateProducts(e) {
   );
   arrayProduct ? arrayProduct.quan++ : state.products.push(product);
   updateBuyBtns();
-  updateDropDown();
+  renderDropDown();
   console.log(state.products);
 }
 
@@ -55,12 +57,15 @@ function createEventListener() {
     .forEach((btn) => btn.addEventListener("click", handleRemove));
   document
     .querySelectorAll(".plus")
-    .forEach((btn) => btn.addEventListener("click", handlePlus));
+    .forEach((btn) =>
+      btn.addEventListener("click", (e) => handlePlusMinus(e, "plus"))
+    );
   document
     .querySelectorAll(".minus")
-    .forEach((btn) => btn.addEventListener("click", handleMinus));
+    .forEach((btn) => btn.addEventListener("click", handlePlusMinus));
 }
 //#endregion
+
 /**
  *
  * Controller Logic
@@ -78,31 +83,19 @@ function handleRemove(e) {
   }
   // e.target.parentElement.remove();
   updateBuyBtns();
-  updateDropDown();
+  renderDropDown();
 }
 
-function handlePlus(e) {
+function handlePlusMinus(e, type) {
   const article = e.target.parentElement.parentElement;
   const nameInCart = article.querySelector("span").innerText;
-  const findProduct = state.products.find(
+  const productInState = state.products.find(
     (pro) => pro.productName == nameInCart
   );
-  findProduct.quan++;
+  type === "plus" ? productInState.quan++ : productInState.quan--;
   updateBuyBtns();
-  updateDropDown();
+  renderDropDown();
 }
-
-function handleMinus(e) {
-  const article = e.target.parentElement.parentElement;
-  const nameInCart = article.querySelector("span").innerText;
-  const index = state.products.findIndex(
-    (pro) => pro.productName == nameInCart
-  );
-  state.products[index].quan--;
-  updateBuyBtns();
-  updateDropDown();
-}
-
 //#endregion
 
 /**
@@ -110,11 +103,10 @@ function handleMinus(e) {
  * View Logic
  *
  */
-
 //#region
 //
 
-function updateDropDown() {
+function renderDropDown() {
   const popUpDiv = document.querySelector(".popup-cart > div");
   let productsHtml = "";
   for (let product of state.products) {
@@ -143,8 +135,8 @@ function updateDropDown() {
 
 function updateBuyBtns() {
   for (let btn of state.buyBtns) {
-    const parent = btn.parentElement;
-    const name = parent.querySelector("h2").innerText;
+    const article = btn.parentElement;
+    const name = article.querySelector("h2").innerText;
     const productIndex = state.products.findIndex(
       (pro) => pro.productName == name
     );
