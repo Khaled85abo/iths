@@ -5,7 +5,12 @@
  */
 //#region
 const state = {};
-
+const COMMANDS = {
+  ADD: "add",
+  REMOVE: "remove",
+  INCREMENT: "increment",
+  DECREMENT: "decrement",
+};
 function initState() {
   state.products = [];
 }
@@ -25,29 +30,26 @@ function initActions() {
   });
 }
 
-function updateStateProducts(e) {
-  const article = e.target.parentElement;
-  const hoodieType = article.querySelector("h3").innerText;
-  const prodcutPrice = article.querySelector("h5").innerText;
-  const [text, priceWithCurrency] = prodcutPrice.split(" ");
-  const [price, currency] = priceWithCurrency.split("k");
-  const productName = article.querySelector("h2").innerText;
-  const img = article.querySelector("img").getAttribute("src");
-  const product = {
-    img: img,
-    productName,
-    price: Number(price),
-    hoodieType,
-    quan: 1,
-  };
+function updateState(productId, command, product) {
+  const pro = state.products;
+  const i = pro.findIndex((pro) => pro.productName == productId);
+  switch (command) {
+    case COMMANDS.ADD:
+      i > -1 ? pro[i].quan++ : pro.push(product);
+      break;
+    case COMMANDS.INCREMENT:
+      pro[i].quan++;
+      break;
+    case COMMANDS.DECREMENT:
+      pro[i].quan--;
+      break;
+    case COMMANDS.REMOVE:
+      pro.splice(i, 1);
+      break;
+  }
 
-  const arrayProduct = state.products.find(
-    (pro) => pro.hoodieType === product.hoodieType
-  );
-  arrayProduct ? arrayProduct.quan++ : state.products.push(product);
   updateBuyBtns();
   renderDropDown();
-  console.log(state.products);
 }
 
 // Create eventlisteners for cart dropDown menu items.
@@ -73,28 +75,37 @@ function createEventListener() {
  */
 //#region
 
+function updateStateProducts(e) {
+  const article = e.target.parentElement;
+  const hoodieType = article.querySelector("h3").innerText;
+  const prodcutPrice = article.querySelector("h5").innerText;
+  const [text, priceWithCurrency] = prodcutPrice.split(" ");
+  const [price, currency] = priceWithCurrency.split("k");
+  const productName = article.querySelector("h2").innerText;
+  const img = article.querySelector("img").getAttribute("src");
+  const product = {
+    img: img,
+    productName,
+    price: Number(price),
+    hoodieType,
+    quan: 1,
+  };
+
+  updateState(productName, COMMANDS.ADD, product);
+}
+
 function handleRemove(e) {
   const article = e.target.parentElement;
   const nameInCart = article.querySelector("span:nth-of-type(1)").innerText;
-  for (let i in state.products) {
-    if (state.products[i].productName == nameInCart) {
-      state.products.splice(i, 1);
-    }
-  }
-  // e.target.parentElement.remove();
-  updateBuyBtns();
-  renderDropDown();
+  updateState(nameInCart, COMMANDS.REMOVE);
 }
 
 function handlePlusMinus(e, type) {
   const article = e.target.parentElement.parentElement;
   const nameInCart = article.querySelector("span").innerText;
-  const productInState = state.products.find(
-    (pro) => pro.productName == nameInCart
-  );
-  type === "plus" ? productInState.quan++ : productInState.quan--;
-  updateBuyBtns();
-  renderDropDown();
+  type === "plus"
+    ? updateState(nameInCart, COMMANDS.INCREMENT)
+    : updateState(nameInCart, COMMANDS.DECREMENT);
 }
 //#endregion
 
@@ -129,7 +140,7 @@ function renderDropDown() {
   }
 
   popUpDiv.innerHTML = productsHtml;
-  //   showCart();
+  //showCart();
   createEventListener();
 }
 
