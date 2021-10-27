@@ -40,18 +40,15 @@ function ckeckHoodieType(e) {
     quan: 1,
   };
 
-  updateProductsArray(product, e.target);
+  updateProductsArray(product);
 }
 
-function updateProductsArray(product, targetBtn) {
+function updateProductsArray(product) {
   const arrayProduct = state.products.find(
     (pro) => pro.hoodieType === product.hoodieType
   );
   arrayProduct ? arrayProduct.quan++ : state.products.push(product);
   updateBuyBtns();
-  // targetBtn.innerText = arrayProduct
-  //   ? `${arrayProduct.quan} in Cart`
-  //   : "In Cart";
   deployProductsArray();
   console.log(state.products);
 }
@@ -130,22 +127,6 @@ function handlePlus(e) {
   findProduct.quan++;
   updateBuyBtns();
   deployProductsArray();
-
-  // for (let btn of state.buyBtns) {
-  //   const parent = btn.parentElement;
-  //   const name = parent.querySelector("h2").innerText;
-  //   if (name == nameInCart) {
-  //     btn.innerText = `${findProduct.quan} in cart`;
-  //   }
-  // }
-
-  // const names = document.querySelectorAll("main > article > h2");
-  // for (let name of names) {
-  //   if (name.innerText == nameInCart) {
-  //     const parent = name.parentElement;
-  //     parent.querySelector("button").innerText = `${findProduct.quan} in cart`;
-  //   }
-  // }
 }
 
 function handleMinus(e) {
@@ -158,35 +139,6 @@ function handleMinus(e) {
 
   updateBuyBtns();
   deployProductsArray();
-  // let targetedBuyBtn;
-  // const names = document.querySelectorAll("main > article > h2");
-  // for (let name of names) {
-  //   if (name.innerText == nameInCart) {
-  //     const parent = name.parentElement;
-  //     targetedBuyBtn = parent.querySelector("button");
-  //     targetedBuyBtn.innerText = `${state.products[index].quan} in cart`;
-  //   }
-  // }
-
-  // if (state.products[index].quan < 1) {
-  //   state.products.splice(index, 1);
-  //   targetedBuyBtn.innerText = "Buy";
-  // }
-
-  // let theBuyBtn;
-  // for (let btn of btns) {
-  //   const parent = btn.parentElement;
-  //   const name = parent.querySelector("h2").innerText;
-  //   if (name == cartName) {
-  //     theBuyBtn = btn;
-  //     btn.innerText = `${state.products[index].quan} in cart`;
-  //   }
-  // }
-
-  // if (products[index].quan < 1) {
-  //   state.products.splice(index, 1);
-  //   theBuyBtn.innerText = "Buy";
-  // }
 }
 
 function updateBuyBtns() {
