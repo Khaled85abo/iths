@@ -1,23 +1,31 @@
-const btns = document.querySelectorAll("main  article  button");
-for (let btn of btns) {
-  btn.addEventListener("click", ckeckHoodieType);
+const state = {};
+
+main();
+
+function main() {
+  initState();
+  initActions();
 }
 
-const products = [];
-
-const checkout = document.querySelector(".popup-cart a");
-checkout.addEventListener("click", saveToLocalStorage);
-
-function saveToLocalStorage() {
-  if (products.length > 0) {
-    localStorage.setItem("products", JSON.stringify(products));
-  }
+function initState() {
+  state.products = [];
 }
 
-function ckeckHoodieType(event) {
-  const targetBtn = event.target;
-  //   targetBtn.innerText = "In Cart";
-  const article = event.target.parentElement;
+function initActions() {
+  const buyBtns = document.querySelectorAll("main  article  button");
+  buyBtns.forEach((btn) => btn.addEventListener("click", ckeckHoodieType));
+  state.buyBtns = buyBtns;
+
+  // Save products list to local storage.
+  document.querySelector(".popup-cart a").addEventListener("click", () => {
+    if (state.products.length > 0) {
+      localStorage.setItem("products", JSON.stringify(products));
+    }
+  });
+}
+
+function ckeckHoodieType(e) {
+  const article = e.target.parentElement;
   const hoodieType = article.querySelector("h3").innerText;
   const prodcutPrice = article.querySelector("h5").innerText;
   const [text, priceWithCurrency] = prodcutPrice.split(" ");
@@ -32,42 +40,26 @@ function ckeckHoodieType(event) {
     quan: 1,
   };
 
-  addtoProducts(product, targetBtn);
+  updateProductsArray(product, e.target);
 }
 
-function addtoProducts(product, targetBtn) {
-  //   let exist = false;
-  //   let index;
-  //   for (let i in products) {
-  //     if (products[i].hoodieType === product.hoodieType) {
-  //       exist = true;
-  //       index = i;
-  //     }
-  //     }
-  //     exist ? products[index].quan++ : products.push(product)
-
-  const arrayProduct = products.find(
+function updateProductsArray(product, targetBtn) {
+  const arrayProduct = state.products.find(
     (pro) => pro.hoodieType === product.hoodieType
   );
-  //Ternary operator
-  arrayProduct ? arrayProduct.quan++ : products.push(product);
-
-  // if (exist) {
-  //     products[index].quan++
-  // } else {
-  //     products.push(product);
-  // }
-  console.log(products);
-  targetBtn.innerText = arrayProduct
-    ? `${arrayProduct.quan} in Cart`
-    : "In Cart";
-  updateElementinDropdown();
+  arrayProduct ? arrayProduct.quan++ : state.products.push(product);
+  updateBuyBtns();
+  // targetBtn.innerText = arrayProduct
+  //   ? `${arrayProduct.quan} in Cart`
+  //   : "In Cart";
+  deployProductsArray();
+  console.log(state.products);
 }
 
-function updateElementinDropdown() {
+function deployProductsArray() {
   const popUpDiv = document.querySelector(".popup-cart > div");
   let productsHtml = "";
-  for (let product of products) {
+  for (let product of state.products) {
     const { img, productName, price, quan } = product;
     const productHtml = `
       <article>
@@ -100,29 +92,23 @@ function updateElementinDropdown() {
 // }
 
 function createEventListener() {
-  const removeBtns = document.querySelectorAll(".popup-cart article > button");
-  const plusBtns = document.querySelectorAll(".plus");
-  const minusBtns = document.querySelectorAll(".minus");
-
-  for (let btn of removeBtns) {
-    btn.addEventListener("click", handleRemoveBtn);
-  }
-
-  for (let btn of plusBtns) {
-    btn.addEventListener("click", handlePlus);
-  }
-
-  for (let btn of minusBtns) {
-    btn.addEventListener("click", handleMinus);
-  }
+  document
+    .querySelectorAll(".popup-cart article > button")
+    .forEach((btn) => btn.addEventListener("click", handleRemoveBtn));
+  document
+    .querySelectorAll(".plus")
+    .forEach((btn) => btn.addEventListener("click", handlePlus));
+  document
+    .querySelectorAll(".minus")
+    .forEach((btn) => btn.addEventListener("click", handleMinus));
 }
 
 function handleRemoveBtn(e) {
   const article = e.target.parentElement;
   const nameInCart = article.querySelector("span:nth-of-type(1)").innerText;
-  for (let i in products) {
-    if (products[i].productName == nameInCart) {
-      products.splice(i, 1);
+  for (let i in state.products) {
+    if (state.products[i].productName == nameInCart) {
+      state.products.splice(i, 1);
     }
   }
   const names = document.querySelectorAll("main > article > h2");
@@ -136,41 +122,89 @@ function handleRemoveBtn(e) {
 }
 
 function handlePlus(e) {
-  const parentEl = e.target.parentElement.parentElement;
-  const cartName = parentEl.querySelector("span").innerText;
-  const findProduct = products.find((pro) => pro.productName == cartName);
+  const article = e.target.parentElement.parentElement;
+  const nameInCart = article.querySelector("span").innerText;
+  const findProduct = state.products.find(
+    (pro) => pro.productName == nameInCart
+  );
   findProduct.quan++;
-  updateElementinDropdown();
+  updateBuyBtns();
+  deployProductsArray();
 
-  for (let btn of btns) {
-    const parent = btn.parentElement;
-    const name = parent.querySelector("h2").innerText;
-    if (name == cartName) {
-      btn.innerText = `${findProduct.quan} in cart`;
-    }
-  }
+  // for (let btn of state.buyBtns) {
+  //   const parent = btn.parentElement;
+  //   const name = parent.querySelector("h2").innerText;
+  //   if (name == nameInCart) {
+  //     btn.innerText = `${findProduct.quan} in cart`;
+  //   }
+  // }
+
+  // const names = document.querySelectorAll("main > article > h2");
+  // for (let name of names) {
+  //   if (name.innerText == nameInCart) {
+  //     const parent = name.parentElement;
+  //     parent.querySelector("button").innerText = `${findProduct.quan} in cart`;
+  //   }
+  // }
 }
 
 function handleMinus(e) {
-  const parentEl = e.target.parentElement.parentElement;
-  const cartName = parentEl.querySelector("span").innerText;
-  const index = products.findIndex((pro) => pro.productName == cartName);
-  products[index].quan--;
+  const article = e.target.parentElement.parentElement;
+  const nameInCart = article.querySelector("span").innerText;
+  const index = state.products.findIndex(
+    (pro) => pro.productName == nameInCart
+  );
+  state.products[index].quan--;
 
-  let theBuyBtn;
-  for (let btn of btns) {
+  updateBuyBtns();
+  deployProductsArray();
+  // let targetedBuyBtn;
+  // const names = document.querySelectorAll("main > article > h2");
+  // for (let name of names) {
+  //   if (name.innerText == nameInCart) {
+  //     const parent = name.parentElement;
+  //     targetedBuyBtn = parent.querySelector("button");
+  //     targetedBuyBtn.innerText = `${state.products[index].quan} in cart`;
+  //   }
+  // }
+
+  // if (state.products[index].quan < 1) {
+  //   state.products.splice(index, 1);
+  //   targetedBuyBtn.innerText = "Buy";
+  // }
+
+  // let theBuyBtn;
+  // for (let btn of btns) {
+  //   const parent = btn.parentElement;
+  //   const name = parent.querySelector("h2").innerText;
+  //   if (name == cartName) {
+  //     theBuyBtn = btn;
+  //     btn.innerText = `${state.products[index].quan} in cart`;
+  //   }
+  // }
+
+  // if (products[index].quan < 1) {
+  //   state.products.splice(index, 1);
+  //   theBuyBtn.innerText = "Buy";
+  // }
+}
+
+function updateBuyBtns() {
+  for (let btn of state.buyBtns) {
     const parent = btn.parentElement;
     const name = parent.querySelector("h2").innerText;
-    if (name == cartName) {
-      theBuyBtn = btn;
-      btn.innerText = `${products[index].quan} in cart`;
+    const productIndex = state.products.findIndex(
+      (pro) => pro.productName == name
+    );
+    if (productIndex > -1) {
+      if (state.products[productIndex].quan <= 0) {
+        state.products.splice(productIndex, 1);
+        btn.innerText = `Buy`;
+      } else if (state.products[productIndex].quan == 1) {
+        btn.innerText = "In Cart";
+      } else {
+        btn.innerText = `${state.products[productIndex].quan} in cart`;
+      }
     }
   }
-
-  if (products[index].quan < 1) {
-    products.splice(index, 1);
-    theBuyBtn.innerText = "Buy";
-  }
-  console.log(products);
-  updateElementinDropdown();
 }
