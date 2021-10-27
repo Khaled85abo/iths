@@ -48,10 +48,11 @@ function updateStateProducts(e) {
   console.log(state.products);
 }
 
+// Create eventlisteners for cart dropDown menu items.
 function createEventListener() {
   document
     .querySelectorAll(".popup-cart article > button")
-    .forEach((btn) => btn.addEventListener("click", handleRemoveBtn));
+    .forEach((btn) => btn.addEventListener("click", handleRemove));
   document
     .querySelectorAll(".plus")
     .forEach((btn) => btn.addEventListener("click", handlePlus));
@@ -67,7 +68,7 @@ function createEventListener() {
  */
 //#region
 
-function handleRemoveBtn(e) {
+function handleRemove(e) {
   const article = e.target.parentElement;
   const nameInCart = article.querySelector("span:nth-of-type(1)").innerText;
   for (let i in state.products) {
@@ -75,8 +76,9 @@ function handleRemoveBtn(e) {
       state.products.splice(i, 1);
     }
   }
-  e.target.parentElement.remove();
+  // e.target.parentElement.remove();
   updateBuyBtns();
+  updateDropDown();
 }
 
 function handlePlus(e) {
@@ -175,10 +177,12 @@ function updateBuyBtns() {
  * Entry Point
  *
  */
-
+//#region
 function main() {
   initState();
   initActions();
 }
 
 main();
+
+//#endregion
