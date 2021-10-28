@@ -17,7 +17,7 @@ function initState() {
 
 function initActions() {
   const buyBtns = document.querySelectorAll("main  article  button");
-  buyBtns.forEach((btn) => btn.addEventListener("click", updateStateProducts));
+  buyBtns.forEach((btn) => btn.addEventListener("click", handleAdd));
 
   // Adding NodeList of buy buttons to state to be accessiable by other functions.
   state.buyBtns = buyBtns;
@@ -52,8 +52,8 @@ function updateState(productId, command, product) {
   renderDropDown();
 }
 
-// Create eventlisteners for cart dropDown menu items.
-function createEventListener() {
+// Creating eventlisteners for cart dropDown items after they are being created .
+function initEventListeners() {
   document
     .querySelectorAll(".popup-cart article > button")
     .forEach((btn) => btn.addEventListener("click", handleRemove));
@@ -75,7 +75,7 @@ function createEventListener() {
  */
 //#region
 
-function updateStateProducts(e) {
+function handleAdd(e) {
   const article = e.target.parentElement;
   const hoodieType = article.querySelector("h3").innerText;
   const prodcutPrice = article.querySelector("h5").innerText;
@@ -141,7 +141,7 @@ function renderDropDown() {
 
   popUpDiv.innerHTML = productsHtml;
   //showCart();
-  createEventListener();
+  initEventListeners();
 }
 
 function updateBuyBtns() {
