@@ -140,7 +140,7 @@ function renderDropDown() {
   }
 
   popUpDiv.innerHTML = productsHtml;
-  //showCart();
+  showCart();
   initEventListeners();
 }
 
@@ -166,8 +166,16 @@ function updateBuyBtns() {
   }
 }
 
+function showCart() {
+  const cart = document.querySelector(".hidden");
+  cart.classList.toggle("hidden");
+  setTimeout(() => {
+    cart.classList.toggle("hidden");
+  }, 1500);
+}
+
 // function showCart() {
-//   const cart = document.querySelector(".popup-cart");
+//   const cart = document.querySelector(".hidden");
 //   cart.style.display = "block";
 //   setTimeout(() => {
 //     cart.style.display = "none";

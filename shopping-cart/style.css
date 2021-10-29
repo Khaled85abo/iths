@@ -34,7 +34,6 @@ header nav {
   position: relative;
 }
 .popup-cart {
-  display: none;
   position: absolute;
   right: 0;
   background-color: #f9f9f9;
@@ -79,7 +78,11 @@ header nav {
 .popup-cart a {
   text-align: center;
 }
-.dropdown:hover .popup-cart {
+.hidden {
+  display: none;
+}
+
+.dropdown:hover .hidden {
   display: block;
 }
 header nav a,
