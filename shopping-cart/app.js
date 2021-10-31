@@ -12,7 +12,9 @@ const COMMANDS = {
   DECREMENT: "decrement",
 };
 function initState() {
-  state.products = [];
+  state.cartItems = [];
+  state.products = products;
+  renderProducts();
 }
 
 function initActions() {
@@ -24,31 +26,31 @@ function initActions() {
 
   // Save products list to local storage.
   document.querySelector(".popup-cart a").addEventListener("click", () => {
-    if (state.products.length > 0) {
+    if (state.cartItems.length > 0) {
       localStorage.setItem("products", JSON.stringify(products));
     }
   });
 }
 
 function updateState(productId, command, product) {
-  const pro = state.products;
-  const i = pro.findIndex((pro) => pro.productName == productId);
+  const item = state.cartItems;
+  const i = item.findIndex((item) => item.id == productId);
   switch (command) {
     case COMMANDS.ADD:
-      i > -1 ? pro[i].quan++ : pro.push(product);
+      i > -1 ? item[i].quantity++ : item.push(product);
       break;
     case COMMANDS.INCREMENT:
-      pro[i].quan++;
+      item[i].quantity++;
       break;
     case COMMANDS.DECREMENT:
-      pro[i].quan--;
+      item[i].quantity--;
       break;
     case COMMANDS.REMOVE:
-      pro.splice(i, 1);
+      item.splice(i, 1);
       break;
   }
 
-  updateBuyBtns();
+  updateBuyBtns(productId);
   renderDropDown();
 }
 
@@ -76,36 +78,28 @@ function initEventListeners() {
 //#region
 
 function handleAdd(e) {
-  const article = e.target.parentElement;
-  const hoodieType = article.querySelector("h3").innerText;
-  const prodcutPrice = article.querySelector("h5").innerText;
-  const [text, priceWithCurrency] = prodcutPrice.split(" ");
-  const [price, currency] = priceWithCurrency.split("k");
-  const productName = article.querySelector("h2").innerText;
-  const img = article.querySelector("img").getAttribute("src");
-  const product = {
-    img: img,
-    productName,
-    price: Number(price),
-    hoodieType,
-    quan: 1,
+  const id = e.target.dataset.id;
+  const product = state.products.find((pro) => pro.id == id);
+  const productItem = {
+    ...product,
+    quantity: 1,
   };
-
-  updateState(productName, COMMANDS.ADD, product);
+  updateState(id, COMMANDS.ADD, productItem);
 }
 
 function handleRemove(e) {
-  const article = e.target.parentElement;
-  const nameInCart = article.querySelector("span:nth-of-type(1)").innerText;
-  updateState(nameInCart, COMMANDS.REMOVE);
+  const itemId = e.target.dataset.id;
+  updateState(itemId, COMMANDS.REMOVE);
 }
 
 function handlePlusMinus(e, type) {
+  console.log(e.target);
   const article = e.target.parentElement.parentElement;
-  const nameInCart = article.querySelector("span").innerText;
+  const btn = article.querySelector("button");
+  const itemId = btn.dataset.id;
   type === "plus"
-    ? updateState(nameInCart, COMMANDS.INCREMENT)
-    : updateState(nameInCart, COMMANDS.DECREMENT);
+    ? updateState(itemId, COMMANDS.INCREMENT)
+    : updateState(itemId, COMMANDS.DECREMENT);
 }
 //#endregion
 
@@ -117,11 +111,30 @@ function handlePlusMinus(e, type) {
 //#region
 //
 
+function renderProducts() {
+  for (let pro of state.products) {
+    const { id, name, price, description, theme, img } = pro;
+    const product = `
+   <article class="art-${id}">
+        <figure><img src="${img}" alt="hoodie" /></figure>
+        <h2>${name}</h2>
+        <h3>${theme}</h3>
+        <h5>Price: ${price}kr</h5>
+        <p>
+          ${description}
+        </p>
+        <button class="buy" data-id="${id}">Buy</button>
+      </article>
+  `;
+    document.querySelector("main").insertAdjacentHTML("afterbegin", product);
+  }
+}
+
 function renderDropDown() {
   const popUpDiv = document.querySelector(".popup-cart > div");
   let productsHtml = "";
-  for (let product of state.products) {
-    const { img, productName, price, quan } = product;
+  for (let item of state.cartItems) {
+    const { img, productName, price, quantity, id } = item;
     const productHtml = `
       <article>
         <img src="./${img}" alt="" height="30px" />
@@ -129,10 +142,10 @@ function renderDropDown() {
         <span>${price} kr</span>
         <div>
             <span class="minus">-</span>
-            <span>${quan}</span>
+            <span>${quantity}</span>
             <span class="plus">+</span>
         </div>
-        <button>✖</button>
+        <button data-id='${id}'>✖</button>
     </article>
 
       `;
@@ -144,43 +157,36 @@ function renderDropDown() {
   initEventListeners();
 }
 
-function updateBuyBtns() {
-  for (let btn of state.buyBtns) {
-    const article = btn.parentElement;
-    const name = article.querySelector("h2").innerText;
-    const productIndex = state.products.findIndex(
-      (pro) => pro.productName == name
-    );
-    if (productIndex > -1) {
-      if (state.products[productIndex].quan <= 0) {
-        state.products.splice(productIndex, 1);
-        btn.innerText = `Buy`;
-      } else if (state.products[productIndex].quan == 1) {
-        btn.innerText = "In Cart";
-      } else {
-        btn.innerText = `${state.products[productIndex].quan} in cart`;
-      }
-    } else {
+function updateBuyBtns(productId) {
+  const index = state.cartItems.findIndex((item) => item.id == productId);
+  const item = state.cartItems[index];
+  const btn = document.querySelector(`main button[data-id='${productId}']`);
+  console.log(btn);
+
+  if (index > -1) {
+    if (item.quantity <= 0) {
+      state.cartItems.splice(index, 1);
       btn.innerText = `Buy`;
+    } else if (item.quantity == 1) {
+      btn.innerText = "In Cart";
+    } else {
+      btn.innerText = `${item.quantity} in cart`;
     }
+  } else {
+    btn.innerText = `Buy`;
   }
 }
 
 function showCart() {
   const cart = document.querySelector(".hidden");
-  cart.classList.toggle("hidden");
-  setTimeout(() => {
+  if (cart) {
     cart.classList.toggle("hidden");
-  }, 1500);
+    setTimeout(() => {
+      cart.classList.toggle("hidden");
+    }, 1500);
+  }
 }
 
-// function showCart() {
-//   const cart = document.querySelector(".hidden");
-//   cart.style.display = "block";
-//   setTimeout(() => {
-//     cart.style.display = "none";
-//   }, 1500);
-// }
 //#endregion
 
 /**
