@@ -47,23 +47,24 @@ pointsDiv.innerText = points;
 startGame();
 
 const checkResponse = (e) => {
-  disableBtns();
+  // disableBtns();
   const response = e.target.innerText;
-  //   const attr = e.target.getAttribute("data-response");
-  //  const attr = e.target.dataset.response
-  console.log(previousCard);
-  previousCard = presentCard;
-  console.log(previousCard);
-  const card = chooseRandomCard();
-  console.log(presentCard);
-  showRightCard(card);
-  hideCardCover();
-  changePlace();
+  // const attr = e.target.getAttribute("data-response");
+  const attr = e.currentTarget.dataset.response;
+  console.log(attr);
+  // console.log(previousCard);
+  // previousCard = presentCard;
+  // console.log(previousCard);
+  // const card = chooseRandomCard();
+  // console.log(presentCard);
+  // showRightCard(card);
+  // hideCardCover();
+  // changePlace();
 
-  const pres = Number(presentCard.value);
-  const prev = Number(previousCard.value);
+  // const pres = Number(presentCard.value);
+  // const prev = Number(previousCard.value);
 
-  let result = false;
+  // let result = false;
 
   //   result = response.includes("higher")
   //     ? pres > prev
@@ -72,23 +73,23 @@ const checkResponse = (e) => {
   //     : pres === prev;
   //   result ? guessedRight() : guessedWrong();
 
-  console.log("previoius number:", prev, "present number: ", pres);
-  if (response.includes("higher") && pres > prev) {
-    console.log("answered right");
-    result = true;
-  }
-  if (response.includes("lower") && pres < prev) {
-    console.log("answered right");
-    result = true;
-  }
-  if (response.includes("same") && pres === prev) {
-    console.log("answered right");
-    result = true;
-  }
+  // console.log("previoius number:", prev, "present number: ", pres);
+  // if (response.includes("higher") && pres > prev) {
+  //   console.log("answered right");
+  //   result = true;
+  // }
+  // if (response.includes("lower") && pres < prev) {
+  //   console.log("answered right");
+  //   result = true;
+  // }
+  // if (response.includes("same") && pres === prev) {
+  //   console.log("answered right");
+  //   result = true;
+  // }
 
-  setTimeout(() => {
-    result ? guessedRight() : guessedWrong();
-  }, 2700);
+  // setTimeout(() => {
+  //   result ? guessedRight() : guessedWrong();
+  // }, 2700);
 };
 
 for (let btn of btns) {

@@ -161,7 +161,6 @@ function updateBuyBtns(productId) {
   const index = state.cartItems.findIndex((item) => item.id == productId);
   const item = state.cartItems[index];
   const btn = document.querySelector(`main button[data-id='${productId}']`);
-  console.log(btn);
 
   if (index > -1) {
     if (item.quantity <= 0) {

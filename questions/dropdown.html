@@ -75,22 +75,23 @@
         .addEventListener("click", showMenu);
 
       // This function Shows menu, but brakes the original css function.
-      //   function showMenu() {
-      //     const menu = document.querySelector(".dropdown-content");
-      //     menu.style.display = "block";
-      //     setTimeout(() => {
-      //       menu.style.display = "none";
-      //     }, 1500);
-      //   }
-
-      //this function works just fine.
       function showMenu() {
         const menu = document.querySelector(".dropdown-content");
-        menu.classList.toggle("show");
+        // Adds inline styling
+        menu.style.display = "block";
         setTimeout(() => {
-          menu.classList.toggle("show");
+          menu.style.display = "none";
         }, 1500);
       }
+
+      //this function works just fine.
+      // function showMenu() {
+      //   const menu = document.querySelector(".dropdown-content");
+      //   menu.classList.toggle("show");
+      //   setTimeout(() => {
+      //     menu.classList.toggle("show");
+      //   }, 1500);
+      // }
     </script>
   </body>
 </html>
