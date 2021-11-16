@@ -36,10 +36,41 @@ header nav {
 .popup-cart {
   position: absolute;
   right: 0;
+  display: none;
   background-color: #f9f9f9;
-  min-width: 260px;
+  min-width: 300px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  animation: fade 1s ease;
+}
+@keyframes fade {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.num-items {
+  background-color: red;
+  font-weight: bold;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  position: absolute;
+  top: 0;
+  transform: scale(1);
+  transition: transform ease-in-out 1s;
+}
+
+.bigger {
+  transform: scale(1.5);
 }
 .popup-cart > div > article {
   position: relative;
@@ -78,11 +109,11 @@ header nav {
 .popup-cart a {
   text-align: center;
 }
-.hidden {
-  display: none;
-}
 
-.dropdown:hover .hidden {
+.show {
+  display: block;
+}
+.dropdown:hover .popup-cart {
   display: block;
 }
 header nav a,

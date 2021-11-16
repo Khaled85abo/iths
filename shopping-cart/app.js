@@ -56,17 +56,31 @@ function updateState(productId, command, product) {
 
 // Creating eventlisteners for cart dropDown items after they are being created .
 function initEventListeners() {
-  document
-    .querySelectorAll(".popup-cart article > button")
-    .forEach((btn) => btn.addEventListener("click", handleRemove));
-  document
-    .querySelectorAll(".plus")
-    .forEach((btn) =>
-      btn.addEventListener("click", (e) => handlePlusMinus(e, "plus"))
-    );
-  document
-    .querySelectorAll(".minus")
-    .forEach((btn) => btn.addEventListener("click", handlePlusMinus));
+  // Instead of selecting buttons, I can selecet articles and add eventlisteners on buttons and send articles to my function.
+  document.querySelectorAll(".popup-cart article").forEach((article) => {
+    const id = article.dataset.id;
+    console.log(id);
+    article
+      .querySelector(".plus")
+      .addEventListener("click", () => updateState(id, COMMANDS.INCREMENT));
+    article
+      .querySelector(".minus")
+      .addEventListener("click", () => updateState(id, COMMANDS.DECREMENT));
+    article
+      .querySelector("button")
+      .addEventListener("click", () => updateState(id, COMMANDS.REMOVE));
+  });
+  // document
+  //   .querySelectorAll(".popup-cart article > button")
+  //   .forEach((btn) => btn.addEventListener("click", handleRemove));
+  //   document
+  //     .querySelectorAll(".plus")
+  //     .forEach((btn) =>
+  //       btn.addEventListener("click", (e) => handlePlusMinus(e, "plus"))
+  //     );
+  //   document
+  //     .querySelectorAll(".minus")
+  //     .forEach((btn) => btn.addEventListener("click", handlePlusMinus));
 }
 //#endregion
 
@@ -136,8 +150,8 @@ function renderDropDown() {
   for (let item of state.cartItems) {
     const { img, productName, price, quantity, id } = item;
     const productHtml = `
-      <article>
-        <img src="./${img}" alt="" height="30px" />
+      <article data-id="${id}">
+        <img src="./${img}" alt="Hoodie" height="30px" />
         <span>${productName}</span>
         <span>${price} kr</span>
         <div>
@@ -178,12 +192,12 @@ function updateBuyBtns(productId) {
 }
 
 function showCart() {
-  const cart = document.querySelector(".hidden");
+  const cart = document.querySelector(".popup-cart");
   if (cart) {
-    cart.classList.toggle("hidden");
+    cart.classList.toggle("show");
     setTimeout(() => {
-      cart.classList.toggle("hidden");
-    }, 1500);
+      cart.classList.toggle("show");
+    }, 2000);
   }
 }
 
