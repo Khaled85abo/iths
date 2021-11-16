@@ -91,6 +91,13 @@
           menu.classList.toggle("show");
         }, 1500);
       }
+
+      function getApi() {
+        fetch("https://test-endpoint-for-climate.p.rapidapi.com/news/dm")
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+      }
+      getApi();
     </script>
   </body>
 </html>

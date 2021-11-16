@@ -5,7 +5,7 @@
  */
 //#region
 const state = {};
-
+start();
 //
 // Initialize State
 //
@@ -199,10 +199,9 @@ function renderCurrentCard() {
  * Entry Point
  *
  */
-function main() {
+function start() {
   initState();
   initActions();
   renderScore();
   renderCurrentCard();
 }
-main();

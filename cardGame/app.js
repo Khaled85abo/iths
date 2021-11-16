@@ -47,13 +47,14 @@ pointsDiv.innerText = points;
 startGame();
 
 const checkResponse = (e) => {
-  disableBtns();
+  // disableBtns();
   const response = e.target.innerText;
-  //   const attr = e.target.getAttribute("data-response");
-  //  const attr = e.target.dataset.response
-  console.log(previousCard);
+  const attr = e.target.getAttribute("data-response");
+  // const attr = e.target.dataset.response;
+  console.log(attr);
+
+  /*
   previousCard = presentCard;
-  console.log(previousCard);
   const card = chooseRandomCard();
   console.log(presentCard);
   showRightCard(card);
@@ -89,6 +90,7 @@ const checkResponse = (e) => {
   setTimeout(() => {
     result ? guessedRight() : guessedWrong();
   }, 2700);
+  */
 };
 
 for (let btn of btns) {
