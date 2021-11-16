@@ -70,28 +70,6 @@
 
     <button class="btn">Show menu</button>
     <script>
-      document
-        .querySelector("body > button")
-        .addEventListener("click", showMenu);
-
-      // This function Shows menu, but brakes the original css function.
-      //   function showMenu() {
-      //     const menu = document.querySelector(".dropdown-content");
-      //     menu.style.display = "block";
-      //     setTimeout(() => {
-      //       menu.style.display = "none";
-      //     }, 1500);
-      //   }
-
-      //this function works just fine.
-      function showMenu() {
-        const menu = document.querySelector(".dropdown-content");
-        menu.classList.toggle("show");
-        setTimeout(() => {
-          menu.classList.toggle("show");
-        }, 1500);
-      }
-
       function getApi() {
         fetch("https://test-endpoint-for-climate.p.rapidapi.com/news/dm")
           .then((res) => res.json())

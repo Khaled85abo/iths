@@ -49,6 +49,7 @@ startGame();
 const checkResponse = (e) => {
   // disableBtns();
   const response = e.target.innerText;
+<<<<<<< HEAD
   const attr = e.target.getAttribute("data-response");
   // const attr = e.target.dataset.response;
   console.log(attr);
@@ -65,6 +66,24 @@ const checkResponse = (e) => {
   const prev = Number(previousCard.value);
 
   let result = false;
+=======
+  // const attr = e.target.getAttribute("data-response");
+  const attr = e.currentTarget.dataset.response;
+  console.log(attr);
+  // console.log(previousCard);
+  // previousCard = presentCard;
+  // console.log(previousCard);
+  // const card = chooseRandomCard();
+  // console.log(presentCard);
+  // showRightCard(card);
+  // hideCardCover();
+  // changePlace();
+
+  // const pres = Number(presentCard.value);
+  // const prev = Number(previousCard.value);
+
+  // let result = false;
+>>>>>>> 7881cdb5463849c65534bf9b865328c81f02a4e3
 
   //   result = response.includes("higher")
   //     ? pres > prev
@@ -73,6 +92,7 @@ const checkResponse = (e) => {
   //     : pres === prev;
   //   result ? guessedRight() : guessedWrong();
 
+<<<<<<< HEAD
   console.log("previoius number:", prev, "present number: ", pres);
   if (response.includes("higher") && pres > prev) {
     console.log("answered right");
@@ -91,6 +111,25 @@ const checkResponse = (e) => {
     result ? guessedRight() : guessedWrong();
   }, 2700);
   */
+=======
+  // console.log("previoius number:", prev, "present number: ", pres);
+  // if (response.includes("higher") && pres > prev) {
+  //   console.log("answered right");
+  //   result = true;
+  // }
+  // if (response.includes("lower") && pres < prev) {
+  //   console.log("answered right");
+  //   result = true;
+  // }
+  // if (response.includes("same") && pres === prev) {
+  //   console.log("answered right");
+  //   result = true;
+  // }
+
+  // setTimeout(() => {
+  //   result ? guessedRight() : guessedWrong();
+  // }, 2700);
+>>>>>>> 7881cdb5463849c65534bf9b865328c81f02a4e3
 };
 
 for (let btn of btns) {

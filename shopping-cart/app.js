@@ -56,7 +56,6 @@ function updateState(productId, command, product) {
 
 // Creating eventlisteners for cart dropDown items after they are being created .
 function initEventListeners() {
-  // Instead of selecting buttons, I can selecet articles and add eventlisteners on buttons and send articles to my function.
   document.querySelectorAll(".popup-cart article").forEach((article) => {
     const id = article.dataset.id;
     article
@@ -174,7 +173,6 @@ function updateBuyBtns(productId) {
   const index = state.cartItems.findIndex((item) => item.id == productId);
   const item = state.cartItems[index];
   const btn = document.querySelector(`main button[data-id='${productId}']`);
-  console.log(btn);
 
   if (index > -1) {
     if (item.quantity <= 0) {
