@@ -59,7 +59,6 @@ function initEventListeners() {
   // Instead of selecting buttons, I can selecet articles and add eventlisteners on buttons and send articles to my function.
   document.querySelectorAll(".popup-cart article").forEach((article) => {
     const id = article.dataset.id;
-    console.log(id);
     article
       .querySelector(".plus")
       .addEventListener("click", () => updateState(id, COMMANDS.INCREMENT));
