@@ -69,6 +69,8 @@
     </div>
 
     <button class="btn">Show menu</button>
+
+    <div></div>
     <script>
       function getApi() {
         fetch("https://test-endpoint-for-climate.p.rapidapi.com/news/dm")
@@ -76,6 +78,58 @@
           .then((data) => console.log(data));
       }
       getApi();
+
+      const productHtml = `<article data-id="${id}">
+                  <img src="./${img}" alt="Hoodie" height="30px" />
+                  <span>${productName}</span>
+                  <span>${price} kr</span>
+                  <div>
+                      <span class="minus">-</span>
+                      <span>${quantity}</span>
+                      <span class="plus">+</span>
+                  </div>
+                  <button data-id='${id}'>✖</button>
+                 </article>`;
+
+      document.querySelectorAll(".popup-cart article").forEach((article) => {
+        const id = article.dataset.id;
+        article
+          .querySelector(".plus")
+          .addEventListener("click", () => updateState(id, COMMANDS.INCREMENT));
+        article
+          .querySelector(".minus")
+          .addEventListener("click", () => updateState(id, COMMANDS.DECREMENT));
+        article
+          .querySelector("button")
+          .addEventListener("click", () => updateState(id, COMMANDS.REMOVE));
+      });
+
+      document
+        .querySelectorAll(".popup-cart article > button")
+        .forEach((btn) => btn.addEventListener("click", handleRemove));
+      document
+        .querySelectorAll(".plus")
+        .forEach((btn) =>
+          btn.addEventListener("click", (e) => handlePlusMinus(e, "plus"))
+        );
+      document
+        .querySelectorAll(".minus")
+        .forEach((btn) => btn.addEventListener("click", handlePlusMinus));
+
+      function handleRemove(e) {
+        const itemId = e.target.dataset.id;
+        updateState(itemId, COMMANDS.REMOVE);
+      }
+
+      function handlePlusMinus(e, type) {
+        console.log(e.target);
+        const article = e.target.parentElement.parentElement;
+        const btn = article.querySelector("button");
+        const itemId = btn.dataset.id;
+        type === "plus"
+          ? updateState(itemId, COMMANDS.INCREMENT)
+          : updateState(itemId, COMMANDS.DECREMENT);
+      }
     </script>
   </body>
 </html>
