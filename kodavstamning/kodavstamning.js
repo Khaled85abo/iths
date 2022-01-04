@@ -1,3 +1,5 @@
+document.querySelector("button").addEventListener("click", create_password);
+
 // Password validation - Without RegExp
 function validatePassword(pwd) {
   // if (pwd.length < 8) return false;
@@ -164,13 +166,13 @@ function createPassword() {
   console.log(pwd);
   return pwd;
 }
-
+*/
 // The following function create a forever loop sometimes
 function create_password() {
   const allChars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789123456789!@#$%^&*()_+=-[]/'";
   let pwd = "";
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 10; i++) {
     if (i === 1 && Number.isInteger(Number(pwd[0]))) {
       create_password();
     }
@@ -194,7 +196,7 @@ function create_password() {
   return pwd;
 }
 
-const pss = createPassword();
+// const pss = create_password();
 
 function containsNumber(pwd) {
   for (let letter of pwd) {
@@ -236,5 +238,3 @@ function containsSpecialCharacter(pwd) {
 
   return false;
 }
-
-*/
