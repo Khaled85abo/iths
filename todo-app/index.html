@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Webpack App</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <article class="todo-container">
+        <header>
+          <h1>Do toDO</h1>
+          <span>
+            <label>Hide done todos</label>
+            <input type="checkbox" class="toggle-done" />
+          </span>
+        </header>
+        <ul class="todo-list"></ul>
+        <p class="todos-left">You have <strong>X</strong> todos left</p>
+        <footer>
+          <span class="input-container">
+            <input
+              type="text"
+              class="todo-input"
+              placeholder="Type something"
+            />
+            <p class="error hide">Sumtin went wrong</p>
+          </span>
+          <button class="add-todo-btn">Add todo</button>
+        </footer>
+      </article>
+      <div class="fade-layer"></div>
+
+      <div class="snackBar">
+        <span class="marterial-icons-outlined">error</span>
+        <p>This is an info snack bar!</p>
+      </div>
+    </div>
+  </body>
+</html>

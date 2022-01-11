@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.todo-container {
+  width: 450px;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+
+  header {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  footer {
+    padding: 1rem;
+    padding-bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}
